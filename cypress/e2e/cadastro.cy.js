@@ -7,7 +7,7 @@ describe('Teste da página de cadastro', () => {
     const senha = faker.internet.password(6)
 
     beforeEach(() =>{
-        cy.visit('https://automationpratice.com.br/register')
+        cy.visit('/register')
     })
     it('Cadastro com sucesso', () => {
         cy.preencheCadastro(nome, email, senha)
