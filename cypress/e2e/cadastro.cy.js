@@ -9,8 +9,8 @@ describe('Teste da página de cadastro', () => {
     beforeEach(() =>{
         cy.visit('/register')
     })
-    it('Cadastro com sucesso', () => {
-        cy.preencheCadastro(nome, email, senha)
+    it('Deve fazer cadastro com sucesso', () => {
+        cy.cadastro(nome, email, senha)
 
         cy.get('#swal2-title').should('have.text', 'Cadastro realizado!')
         cy.contains('button', 'OK').should('be.visible').click()
@@ -22,13 +22,13 @@ describe('Teste da página de cadastro', () => {
     })
 
     it('Senha com menos de seis digitos', () => {
-        cy.preencheCadastro(nome, email, faker.string.alphanumeric({ length: 5 }))
+        cy.cadastro(nome, email, faker.string.alphanumeric({ length: 5 }))
 
         cy.contains('span', 'O campo senha deve ter pelo menos 6 dígitos').should('be.visible')
     })
 
     it('Campo e-mail inválido', () => {
-        cy.preencheCadastro(nome, 'leo.com', senha)
+        cy.cadastro(nome, 'leo.com', senha)
 
         cy.contains('span', 'O campo e-mail deve ser prenchido corretamente')
             .should('be.visible')
