@@ -1,16 +1,13 @@
 /// <reference types="cypress" />
 import { faker } from '@faker-js/faker'
+import { user } from '../support/constantes';
 
 describe('Teste da página de cadastro', () => {
-    const nome = faker.person.fullName()
-    const email = faker.internet.email()
-    const senha = faker.internet.password(6)
-
     beforeEach(() =>{
         cy.visit('/register')
     })
-    it('Deve fazer cadastro com sucesso', () => {
-        cy.cadastro(nome, email, senha)
+    it('Deve realizar o cadastro com sucesso', () => {
+        cy.cadastro(user.fullName, user.email, user.password)
 
         cy.get('#swal2-title').should('have.text', 'Cadastro realizado!')
         cy.contains('button', 'OK').should('be.visible').click()
@@ -22,13 +19,13 @@ describe('Teste da página de cadastro', () => {
     })
 
     it('Senha com menos de seis digitos', () => {
-        cy.cadastro(nome, email, faker.string.alphanumeric({ length: 5 }))
+        cy.cadastro(user.fullName, user.email, '123')
 
         cy.contains('span', 'O campo senha deve ter pelo menos 6 dígitos').should('be.visible')
     })
 
     it('Campo e-mail inválido', () => {
-        cy.cadastro(nome, 'leo.com', senha)
+        cy.cadastro(user.fullName, 'invalido', user.password)
 
         cy.contains('span', 'O campo e-mail deve ser prenchido corretamente')
             .should('be.visible')
