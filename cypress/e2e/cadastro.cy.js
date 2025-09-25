@@ -1,5 +1,4 @@
 /// <reference types="cypress" />
-import { faker } from '@faker-js/faker'
 import { user } from '../support/constantes';
 
 describe('Teste da página de cadastro', () => {
